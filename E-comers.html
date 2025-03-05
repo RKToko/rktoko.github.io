@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-comers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      color: #333;
+    }
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .store-name {
+      font-size: 24px;
+      font-weight: 600;
+      color: #555;
+    }
+    header .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    /* Slider Carousel */
+   .slider {
+      position: relative;
+      width: 100vw; /* mengambil seluruh lebar viewport */
+      height: 300px; /* tinggi slider, bisa disesuaikan */
+      overflow: hidden;
+    }
+    /* Container Slide */
+    .slides {
+      display: flex;
+      width: calc(100vw * 3); /* 3 slide, masing-masing 100vw */
+      height: 100%;
+      animation: slide 12s infinite;
+    }
+    /* Setiap Slide */
+    .slide {
+      width: 100vw; /* setiap slide memenuhi lebar viewport */
+      flex-shrink: 0;
+      display: flex;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* atau 'cover' jika ingin mengisi penuh */
+      object-position: center;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0vw); }
+      33% { transform: translateX(0vw); }
+      36% { transform: translateX(-100vw); }
+      66% { transform: translateX(-100vw); }
+      69% { transform: translateX(-200vw); }
+      99% { transform: translateX(-200vw); }
+      100% { transform: translateX(0vw); }
+    }
+    /* Kategori Produk */
+    .category-section {
+      margin: 20px;
+    }
+    .category-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-left: 5px solid #a8edea;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      color: #555;
+    }
+    .product-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px;
+      scroll-snap-type: x mandatory;
+    }
+    .product-row::-webkit-scrollbar {
+      height: 8px;
+    }
+    .product-row::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    .product-row::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+    .product-card {
+      background: #fff;
+      min-width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      scroll-snap-align: center;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 10px;
+    }
+    .product-info h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .product-info p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #888;
+    }
+    .product-info .discount {
+      color: #e74c3c;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+    .product-card button {
+      background: #a8edea;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      color: #333;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .product-card button:hover {
+      background: #fed6e3;
+    }
+    /* Checkout / Keranjang */
+    .cart {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .cart h2, .cart h3 {
+      margin: 0 0 15px;
+      color: #555;
+    }
+    .cart-details div {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .form-group {
+      margin: 15px 0;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button.submit-btn {
+      background: #a8edea;
+      border: none;
+      padding: 12px 20px;
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    button.submit-btn:hover {
+      background: #fed6e3;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .product-card {
+        min-width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="store-name">E-comers</div>
+    <img src="Foto/Logo1.png" alt="Logo" class="logo">
+  </header>
+
+  <!-- Slider Otomatis -->
+  <div class="slider">
+    <div class="slides">
+      <div class="slide">
+        <img src="Foto/Hp.jpeg" alt="Promo 1">
+      </div>
+      <div class="slide">
+        <img src="Foto/Laptop.jpeg" alt="Promo 2">
+      </div>
+      <div class="slide">
+        <img src="Foto/Tas.jpeg" alt="Promo 3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Produk Berdasarkan Kategori -->
+  <div class="category-section">
+    <div class="category-title">Kategori Elektronik</div>
+    <div class="product-row" id="electronicsRow">
+      <!-- Produk Elektronik akan muncul di sini -->
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">Kategori Fashion</div>
+    <div class="product-row" id="fashionRow">
+      <!-- Produk Fashion akan muncul di sini -->
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">Kategori Rumah Tangga</div>
+    <div class="product-row" id="homeRow">
+      <!-- Produk Rumah Tangga akan muncul di sini -->
+    </div>
+  </div>
+
+  <!-- Checkout / Keranjang -->
+  <section class="cart" id="cartSection" style="display:none;">
+    <h2>Checkout</h2>
+    <div class="cart-details" id="cartDetails"></div>
+    <h3>Total Harga: <span id="totalPrice">0</span></h3>
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="buyerName">Nama Pemesan:</label>
+        <input type="text" id="buyerName" required>
+      </div>
+      <div class="form-group">
+        <label for="buyerAddress">Alamat Pemesan:</label>
+        <textarea id="buyerAddress" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="buyerPhone">No Telefon:</label>
+        <input type="text" id="buyerPhone" required>
+      </div>
+      <button type="submit" class="submit-btn">Kirim Pesanan ke WhatsApp</button>
+    </form>
+  </section>
+
+  <script>
+    // Data produk per kategori
+    const products = {
+      electronics: [
+        { id: 1, name: "Smartphone", image: "Foto/Hp.jpeg", price: 2500000, discount: 10 },
+        { id: 2, name: "Laptop", image: "Foto/Laptop.jpeg", price: 7500000, discount: 0 },
+        { id: 3, name: "Tablet", image: "Foto/Hp.jpeg", price: 3500000, discount: 5 },
+        { id: 4, name: "Headphone", image: "Foto/Laptop.jpeg", price: 500000, discount: 0 }
+      ],
+      fashion: [
+        { id: 5, name: "Kaos", image: "Foto/Baju.jpeg", price: 100000, discount: 0 },
+        { id: 6, name: "Jaket", image: "Foto/Baju.jpeg", price: 250000, discount: 10 },
+        { id: 7, name: "Sepatu", image: "Foto/Sepatu.jpeg", price: 500000, discount: 5 },
+        { id: 8, name: "Tas", image: "Foto/Tas.jpeg", price: 300000, discount: 0 }
+      ],
+      home: [
+        { id: 9, name: "Lampu", image: "Foto/Lampu.jpeg", price: 150000, discount: 0 },
+        { id: 10, name: "Lampu", image: "Foto/Lampu.jpeg", price: 3500000, discount: 10 },
+        { id: 11, name: "Sapu", image: "Foto/Sapu.jpeg", price: 750000, discount: 5 },
+        { id: 12, name: "Sapu", image: "Foto/Sapu.jpeg", price: 500000, discount: 0 }
+      ]
+    };
+
+    let cart = [];
+
+    // Fungsi untuk menampilkan produk per kategori
+    function displayProducts(category, elementId) {
+      const rowElement = document.getElementById(elementId);
+      products[category].forEach(product => {
+        let finalPrice = product.price;
+        if (product.discount && product.discount > 0) {
+          finalPrice = product.price - (product.price * product.discount / 100);
+        }
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-info">
+            <h4>${product.name}</h4>
+            <p>Rp ${product.price.toLocaleString()}</p>
+            ${product.discount > 0 ? `<p class="discount">Diskon: ${product.discount}% | Rp ${finalPrice.toLocaleString()}</p>` : ""}
+          </div>
+          <button onclick="addToCart('${category}', ${product.id})">Tambah ke Keranjang</button>
+        `;
+        rowElement.appendChild(card);
+      });
+    }
+
+    // Menambahkan produk ke keranjang
+    function addToCart(category, productId) {
+      const product = products[category].find(p => p.id === productId);
+      if (product) {
+        cart.push(product);
+        updateCart();
+      }
+    }
+
+    // Memperbarui tampilan keranjang dan perhitungan total harga
+    function updateCart() {
+      const cartDetails = document.getElementById("cartDetails");
+      cartDetails.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        let finalPrice = item.price;
+        if (item.discount && item.discount > 0) {
+          finalPrice = item.price - (item.price * item.discount / 100);
+        }
+        total += finalPrice;
+        const itemDiv = document.createElement("div");
+        itemDiv.innerHTML = `<p>${item.name} - Rp ${finalPrice.toLocaleString()}</p>`;
+        cartDetails.appendChild(itemDiv);
+      });
+      document.getElementById("totalPrice").innerText = total.toLocaleString();
+      document.getElementById("cartSection").style.display = cart.length > 0 ? "block" : "none";
+    }
+
+    // Menangani pengiriman data pesanan ke WhatsApp
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const buyerName = document.getElementById("buyerName").value;
+      const buyerAddress = document.getElementById("buyerAddress").value;
+      const buyerPhone = document.getElementById("buyerPhone").value;
+      const totalPrice = document.getElementById("totalPrice").innerText;
+      
+      let orderDetails = "Detail Pesanan:%0A";
+      cart.forEach(item => {
+        let finalPrice = item.price;
+        if (item.discount && item.discount > 0) {
+          finalPrice = item.price - (item.price * item.discount / 100);
+        }
+        orderDetails += `${item.name} - Rp ${finalPrice.toLocaleString()}%0A`;
+      });
+      orderDetails += "%0ATotal Harga: Rp " + totalPrice + "%0A";
+      orderDetails += "%0AData Pemesan:%0A";
+      orderDetails += "Nama: " + buyerName + "%0A";
+      orderDetails += "Alamat: " + buyerAddress + "%0A";
+      orderDetails += "No Telefon: " + buyerPhone;
+      
+      // Ganti nomor WhatsApp dengan nomor penjual (tanpa tanda + dan spasi)
+      const waNumber = "6283183054359";
+      const waLink = "https://wa.me/" + waNumber + "?text=" + orderDetails;
+      window.open(waLink, "_blank");
+    });
+
+    // Pastikan DOM sudah siap sebelum menampilkan produk
+    document.addEventListener("DOMContentLoaded", function() {
+      displayProducts('electronics', 'electronicsRow');
+      displayProducts('fashion', 'fashionRow');
+      displayProducts('home', 'homeRow');
+    });
+  </script>
+</body>
+</html>
